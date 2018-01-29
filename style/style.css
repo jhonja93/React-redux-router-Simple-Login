@@ -10,3 +10,7 @@ form[name="loginForm"] {
     margin-top: 10px;
     text-align: right;
   }
+  .mensaje {
+    font-size: 25px;
+    margin-top: 20px;
+  }

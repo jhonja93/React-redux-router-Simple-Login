@@ -5,7 +5,8 @@ export default [
     },
     {
       title: 'login',
-      url: '/login'
+      url: '/login',
+      isLogged: false
     },
     {
       title: 'Logout',

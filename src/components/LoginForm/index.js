@@ -6,15 +6,21 @@ import { checkLogin } from '../../actions'
 // import './LoginForm.css'
 
 class LoginForm extends Component {
+
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLoginPending: false,
+            isLoginSuccess: false,
+            loginError: false,
+            logged: false
+        };
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     render() {
         let {username, password} = this.state;
-        let {isLoginPending, isLoginSuccess, loginError} = this.props;
+        let {isLoginPending, isLoginSuccess, loginError, logged} = this.props;
         return (
             <form name="loginForm" onSubmit={this.onSubmit}>
                 <Row>
@@ -23,11 +29,12 @@ class LoginForm extends Component {
                     <Input type="submit" value="Login" />
                 </Row>
                 <Row>
-                    <div className="message">
-                        { isLoginPending && <div>Please wait...</div> }
-                        { isLoginSuccess && <div>Success.</div> }
-                        { loginError && <div>{loginError.message}</div> }
-                    </div>
+                <div className="message">
+                    { logged && <div>Bienvenido</div>}
+                    {/* { isLoginPending && <div>Please wait...</div> }
+                    { isLoginSuccess && <div>Success.</div> }
+                    { loginError && <div>{loginError.message}</div> } */}
+                </div>
                 </Row>
             </form>
         )
@@ -46,10 +53,12 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('STATE2 ' ,state)
     return {
-      isLoginPending: state.isLoginPending,
-      isLoginSuccess: state.isLoginSuccess,
-      loginError: state.loginError
+      isLoginPending: state.login.isLoginPending,
+      isLoginSuccess: state.login.isLoginSuccess,
+      loginError: state.login.loginError,
+      logged: state.login.logged
     };
   }
   

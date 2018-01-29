@@ -1,29 +1,49 @@
 import React, { Component } from 'react'
-import Home from './home'
+import { connect } from 'react-redux'
+import { checkLogin, logout } from '../actions'
+
+import Content from './content'
 import { Preloader, Navbar } from 'react-materialize'
 import { Link } from 'react-router-dom'
 
-import items from '../data/menu';
-
 class App extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      logged: false
+    }
+  }
+
   render() {
-    const { children } = this.props
+    const { children, logged } = this.props
     return (
       <div>
         <Navbar brand='React-Redux Login' right className="navbar">
           <ul className="Menu">
-            {
-              items && items.map(
-                (item, key) => <li key={key}><Link to={item.url}>{item.title}</Link></li>
-              )
-            }
+            <li><Link to="/">Home</Link></li>
+            {/* <li><Link to="/login">Login</Link></li> */}
+            <li>{ logged && <Link to="/logout" onClick={logout()}>Logout</Link>}</li>
           </ul>
         </Navbar>
-        <Home body={children}/>
+        <Content body={children} />
       </div>
     );
   }
 }
 
+function mapStateToProps(state) {
+  console.log('STATE ',state)
+  return {
+    logged: state.login.logged
+  }
+}
 
-export default App
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  };
+}
+
+export default connect(mapStateToProps, { checkLogin })(App)

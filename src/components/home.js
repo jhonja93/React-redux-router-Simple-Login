@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { showUsers, login } from '../actions'
-import randomToken from 'random-token'
+import { showUsers, checkLogin } from '../actions'
 import UsersTable from './UsersTable'
 import LoginForm from './LoginForm'
 
@@ -12,12 +11,13 @@ class Home extends Component {
 
     this.state = {
       users: null,
-      login: false
+      logged: false
     }
   }
 
   componentWillMount() {
     this.props.showUsers()
+    this.props.checkLogin()
   }
 
   renderUsersList() {
@@ -33,10 +33,12 @@ class Home extends Component {
   }
 
   render() {
-    const {users, login} = this.props
+    const {users, logged} = this.props
     return (
       <div>
-        {login? (!users? <div>'Error al cargar usuarios'</div> : <UsersTable users={users}/>) : <LoginForm />}
+        { logged && <UsersTable users={users}/>}
+        { !logged && <p className="mensaje" >Necesitas autenticarte para ver el contenido</p>}
+        { !logged && <LoginForm />}
       </div>
     );
   }
@@ -44,8 +46,9 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.user.list
+    users: state.user.list,
+    logged: state.login.logged
   }
 }
 
-export default connect(mapStateToProps, { showUsers })(Home)
+export default connect(mapStateToProps, { showUsers, checkLogin })(Home)

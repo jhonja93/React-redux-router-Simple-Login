@@ -9,9 +9,9 @@ import Logout from './components/logout'
 const AppRoutes = () => (
     <App>
         <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
         </Switch>
     </App>
 )

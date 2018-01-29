@@ -1,14 +1,18 @@
-import { SET_LOGIN_PENDING, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR } from './../actions'
+import { SET_LOGIN_PENDING, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, LOGGED } from './../actions'
 
 
 const initialState = {
     isLoginSuccess: false,
     isLoginPending: false,
-    loginError: null
+    loginError: null,
+    logged: false
 }
 
 export function login(state = initialState, action) {
   switch (action.type) {
+    case LOGGED:
+      return {...state, logged: action.logged}
+
     case SET_LOGIN_PENDING:
       return {...state, isLoginPending: action.isLoginPending}
 
