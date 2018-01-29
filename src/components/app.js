@@ -20,6 +20,7 @@ class App extends Component {
     const { children, logged } = this.props
     return (
       <div>
+        {/* Componente principal, mostramos el Navbar junto a los links y el contenido de cada ruta a traves de Component */}
         <Navbar brand='React-Redux Login' right className="navbar">
           <ul className="Menu">
             <li><Link to="/">Home</Link></li>

@@ -36,6 +36,7 @@ class Home extends Component {
     const {users, logged} = this.props
     return (
       <div>
+        {/* La propiedad propped es la que nos dira si se encuentra logeado o no y mostramos los componentes en base a ella */}
         { logged && <UsersTable users={users}/>}
         { !logged && <p className="mensaje" >Necesitas autenticarte para ver el contenido</p>}
         { !logged && <LoginForm />}

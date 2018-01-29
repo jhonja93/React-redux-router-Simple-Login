@@ -5,10 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import AppRoutes from './routes'
 
-// import App from './components/app';
 import { store } from './store';
-
-//const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
   <Provider store={store}>
